@@ -12,12 +12,9 @@ import com.github.tomakehurst.wiremock.extension.ResponseDefinitionTransformer;
 import com.github.tomakehurst.wiremock.http.Request;
 import com.github.tomakehurst.wiremock.http.ResponseDefinition;
 import wiremock.org.apache.commons.lang3.StringUtils;
-
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Matcher;
