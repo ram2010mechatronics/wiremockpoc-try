@@ -6,8 +6,8 @@ import com.github.tomakehurst.wiremock.extension.ResponseTransformer;
 import com.github.tomakehurst.wiremock.http.Request;
 import com.github.tomakehurst.wiremock.http.Response;
 import java.sql.SQLException;
-
-
+import java.util.Map;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 
 public class wiremock_ext extends ResponseTransformer {
@@ -37,6 +37,16 @@ public class wiremock_ext extends ResponseTransformer {
 
     @Override
     public Response transform(Request request, Response response, FileSource fileSource, Parameters parameters) {
+
+        final Map<String, Object> queries = this.getQueriesConfig(parameters);
+        stubFor(get(urlEqualTo("/local-transform")).willReturn(aResponse()
+                .withStatus(200)
+                .withBody("Original body")
+                .withTransformers("my-transformer", "other-transformer")));
+        return response;
+    }
+
+    private Map<String,Object> getQueriesConfig(Parameters parameters) {
 
         return null;
     }
