@@ -8,8 +8,6 @@ import com.github.tomakehurst.wiremock.http.Response;
 
 public class wiremock_ext extends ResponseTransformer {
 
-
-
     @Override
     public Response transform(Request request, Response response, FileSource fileSource, Parameters parameters) {
         return null;
@@ -20,7 +18,8 @@ public class wiremock_ext extends ResponseTransformer {
         return null;
     }
 
-    public boolean applyGlobally() {
+    public boolean applyGlobally()
+    {
         return false;
     }
 }
