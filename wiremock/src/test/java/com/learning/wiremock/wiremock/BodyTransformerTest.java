@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.isA;
 public class BodyTransformerTest {
 
     @Rule
-    public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(8080).extensions(new BodyTransformers()));
+    public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(8081).extensions(new BodyTransformers()));
     
     @Test
     public void willReturnFieldWithNameValueWhenOnlyRootElementForXml() {

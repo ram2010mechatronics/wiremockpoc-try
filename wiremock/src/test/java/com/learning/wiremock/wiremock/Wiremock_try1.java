@@ -21,7 +21,7 @@ public class Wiremock_try1 {
 	BodyTransformers bt = new BodyTransformers();
 	
 	@Rule
-    public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(8080).extensions(bt));
+    public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(8089).extensions(bt));
     
     @Test
     public void willReturnFieldWithNameValueWhenOnlyRootElementForXml() {
