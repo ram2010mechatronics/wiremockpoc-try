@@ -28,7 +28,7 @@ public class DB_Result {
         doc.appendChild(results);
         Class.forName("org.hsqldb.jdbcDriver").newInstance();
         Connection con = DriverManager.getConnection("jdbc:hsqldb:file:" + csvPath, "CSV", "");
-        ResultSet rs = con.createStatement().executeQuery("select * from emp_address where \"emp_no\" = '7369'");
+        ResultSet rs = con.createStatement().executeQuery("select * from emp_address where \"emp_no\" = '7902'");
         ResultSetMetaData rsmd = rs.getMetaData();
         int colCount = rsmd.getColumnCount();
         while (rs.next()) {
