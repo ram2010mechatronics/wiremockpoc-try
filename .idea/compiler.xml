@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="wiremock" target="7" />
+      <module name="wiremock" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
