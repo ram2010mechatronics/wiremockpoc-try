@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="71092167-958d-47b2-abb6-2e00bb642245" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/wiremock/src/main/java/com/learning/wiremock/wiremock/ConfigHandler.java" afterPath="$PROJECT_DIR$/wiremock/src/main/java/com/learning/wiremock/wiremock/ConfigHandler.java" />
-      <change beforePath="$PROJECT_DIR$/wiremock/src/main/java/com/learning/wiremock/wiremock/wiremock_ext.java" afterPath="$PROJECT_DIR$/wiremock/src/main/java/com/learning/wiremock/wiremock/wiremock_ext.java" />
-    </list>
+    <list default="true" id="71092167-958d-47b2-abb6-2e00bb642245" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/wiremock/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
