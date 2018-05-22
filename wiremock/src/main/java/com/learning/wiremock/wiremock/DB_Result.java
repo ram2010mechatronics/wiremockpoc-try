@@ -19,6 +19,7 @@ public class DB_Result {
 
     private static String csvPath = "D:\\WireMock\\wire-mock-master\\wiremockpoc-try\\wiremock\\src\\test\\resources\\csv";
     private static int rows = 1;
+    public static String xmlbody;
 
     public static void main(String args[]) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -53,6 +54,8 @@ public class DB_Result {
         StreamResult sr = new StreamResult(sw);
         transformer.transform(domSource, sr);
         System.out.println(sw.toString());
+
+        xmlbody = sw.toString();
         con.close();
         rs.close();
     }
