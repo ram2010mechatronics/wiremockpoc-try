@@ -5,12 +5,8 @@ import com.github.tomakehurst.wiremock.extension.Parameters;
 import com.github.tomakehurst.wiremock.extension.ResponseTransformer;
 import com.github.tomakehurst.wiremock.http.Request;
 import com.github.tomakehurst.wiremock.http.Response;
-import wiremock.org.apache.commons.lang3.StringUtils;
-
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 
 
@@ -19,14 +15,15 @@ public class wiremock_ext extends ResponseTransformer {
     private final DbManager manager;
     private final XmlConverter xmlConverter;
     private final ConfigHandler config;
-    private String TRANSFORMER_NAME;
-    private boolean APPLY_GLOBALLY = false;
+    private static final String TRANSFORMER_NAME = "body-transformer";
+    private static final boolean APPLY_GLOBALLY = false;
 
     public wiremock_ext(DbManager manager, XmlConverter xmlConverter, ConfigHandler config) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         this.manager = manager;
         this.xmlConverter = xmlConverter;
         this.config = config;
-        this.manager.dbConnect();    }
+        this.manager.dbConnect();
+    }
 
     @Override
     public String getName() {
