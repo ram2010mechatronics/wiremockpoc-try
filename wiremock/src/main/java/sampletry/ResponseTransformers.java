@@ -1,4 +1,4 @@
-package com.learning.wiremock.wiremock;
+package sampletry;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.common.FileSource;
@@ -7,34 +7,32 @@ import com.github.tomakehurst.wiremock.extension.Parameters;
 import com.github.tomakehurst.wiremock.extension.ResponseTransformer;
 import com.github.tomakehurst.wiremock.http.Request;
 import com.github.tomakehurst.wiremock.http.Response;
-import com.github.tomakehurst.wiremock.testsupport.WireMockTestClient;
+import io.restassured.RestAssured;
 import org.junit.Test;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static com.github.tomakehurst.wiremock.http.HttpHeader.httpHeader;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static io.restassured.RestAssured.given;
 
-public class ResponseTransformerAcceptanceTest {
+
+public class ResponseTransformers {
 
     WireMockServer wm;
-    WireMockTestClient client;
+    public static io.restassured.response.Response response;
+
 
     @Test
     public void transformsStubResponse() {
-        startWithExtensions(StubResponseTransformer.class);
+        startWithExtensions((Class<? extends Extension>) StubResponseTransformer.class);
 
         wm.stubFor(get(urlEqualTo("/response-transform")).willReturn(aResponse().withBody("Original body")));
 
-        assertThat(client.get("/response-transform").content(), is("Modified body"));
+
     }
 
     @Test
     public void acceptsTransformerParameters() {
-        startWithExtensions(StubResponseTransformerWithParams.class);
+        startWithExtensions((Class<? extends Extension>) StubResponseTransformerWithParams.class);
 
         wm.stubFor(get(urlEqualTo("/response-transform-with-params")).willReturn(
                 aResponse()
@@ -43,23 +41,31 @@ public class ResponseTransformerAcceptanceTest {
                         .withTransformerParameter("flag", true)
                         .withBody("Original body")));
 
-        assertThat(client.get("/response-transform-with-params").content(), is("John, 66, true"));
+        response =  given()
+                .contentType("application/json")
+                .body("<var>101</var>")
+                .post("/response-transform-with-params");
+        System.out.println(response.getStatusCode());
+        System.out.println(response.getBody().asString());
+        System.out.println(response.getContentType());
+        System.out.println(RestAssured.baseURI + ":" + RestAssured.port + RestAssured.basePath );
+
     }
 
     @Test
     public void globalTransformAppliedWithLocalParameters() {
-        startWithExtensions(GlobalResponseTransformer.class);
+        startWithExtensions((Class<? extends Extension>) GlobalResponseTransformer.class);
 
         wm.stubFor(get(urlEqualTo("/global-response-transform")).willReturn(aResponse()));
 
-        assertThat(client.get("/global-response-transform").firstHeader("X-Extra"), is("extra val"));
+
     }
 
     @SuppressWarnings("unchecked")
     private void startWithExtensions(Class<? extends Extension> extensionClasses) {
         wm = new WireMockServer(wireMockConfig().dynamicPort().extensions(extensionClasses));
         wm.start();
-        client = new WireMockTestClient(wm.port());
+
     }
 
     public static class StubResponseTransformer extends ResponseTransformer {
@@ -122,5 +128,18 @@ public class ResponseTransformerAcceptanceTest {
         public boolean applyGlobally() {
             return true;
         }
+    }
+
+    public void testMethod(){
+        WireMockServer wireMockServer = new WireMockServer(8089);
+        wireMockServer.start();
+
+        stubFor(get(urlEqualTo("/api/get-magic"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"currently\":{\"windSpeed\":12.34}}")));
+
+        wireMockServer.start();
+
     }
 }

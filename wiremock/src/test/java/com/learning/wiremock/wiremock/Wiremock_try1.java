@@ -6,6 +6,8 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static io.restassured.RestAssured.given;
 
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -21,7 +23,8 @@ public class Wiremock_try1 {
 	BodyTransformers bt = new BodyTransformers();
 	
 	@Rule
-    public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(8089).extensions(bt));
+    public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(8084).extensions(bt));
+
     
     @Test
     public void willReturnFieldWithNameValueWhenOnlyRootElementForXml() {
@@ -42,4 +45,5 @@ public class Wiremock_try1 {
        System.out.println(RestAssured.baseURI + ":" + RestAssured.port + RestAssured.basePath );
 
     }
+
 }
