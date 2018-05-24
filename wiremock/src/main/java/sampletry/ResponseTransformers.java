@@ -133,8 +133,7 @@ public class ResponseTransformers {
     public void testMethod(){
         WireMockServer wireMockServer = new WireMockServer(8089);
         wireMockServer.start();
-
-        stubFor(get(urlEqualTo("/api/get-magic"))
+        wireMockServer.stubFor(get(urlEqualTo("/api/get-magic"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBody("{\"currently\":{\"windSpeed\":12.34}}")));
